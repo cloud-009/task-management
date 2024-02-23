@@ -1,0 +1,98 @@
+$gap-between-cards: 20px;
+$card-width: 280px;
+$card-height: 100px;
+
+.container-main {
+    padding: 25px 35px;
+
+    .title-heading {
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin: 10px 0 10px;
+        color: var(--primary-color);
+    }
+
+    >.card-container {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: $gap-between-cards;
+
+        >div.card {
+            width: $card-width;
+            height: $card-height;
+            border: 1px solid var(--quaternery-color);
+            padding: 10px;
+            border-radius: 10px;
+            background-color: var(--primary-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            >div.title-container {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                >div.dropdown>img {
+                    background-color: var(--quaternery-color);
+                    padding: 0 5px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                }
+
+                .title {
+                    color: white;
+                    font-weight: 500;
+                }
+            }
+
+            .date-container {
+                width: 50%;
+                border-radius: 5px;
+                background-color: white;
+                border: 2px solid var(--quaternery-color);
+                padding: 0 5px;
+                font-size: 0.8rem;
+                box-shadow: 1px 2px 3px var(--quaternery-color);
+            }
+
+            .footer>p {
+                color: white;
+                font-size: 0.8rem;
+
+                >span {
+                    color: white;
+                }
+            }
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                top: 20px;
+                background-color: var(--dropdown-bg);
+                min-width: 100px;
+                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                z-index: 1;
+
+                >a {
+                    font-size: 0.8rem;
+                    font-weight: 500;
+                    padding: 5px 10px;
+                    text-decoration: none;
+                    display: block;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: #f1f1f1;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="title">
+        <p class="title-head">Create Task</p>
+    </div>
+    <div class="content">
+        <form [formGroup]="taskForm">
+            <div class="user-details">
+                <div class="input-box">
+                    <span class="details">Title</span>
+                    <input type="text" formControlName="title" placeholder="creating wireframe">
+                </div>
+                <div class="input-box">
+                    <span class="details">Description</span>
+                    <input type="text" formControlName="description" placeholder="wireframe for user design">
+                </div>
+                <div class="input-box">
+                    <span class="details">Due date</span>
+                    <input type="date" formControlName="dueDate" placeholder="dd/mm/yyyy">
+                </div>
+                <div class="input-box">
+                    <span class="details">Assigned To</span>
+                    <input type="email" formControlName="assignedTo" placeholder="Harry Styles">
+                </div>
+                <div class="input-box">
+                    <span class="details">Status</span>
+                    <input type="email" formControlName="status" placeholder="Pending">
+                </div>
+            </div>
+            <div class="button">
+                <button type="button" class="action-button" (click)="handleCancel()">Cancel</button>
+                @if (!isEditMode) {
+                    <button type="button" class="action-button" (click)="postFormData()">Submit</button>
+                }
+                @if (isEditMode) {
+                <button type="button" class="action-button" (click)="updateTaskDetails()">Update</button>
+                }
+            </div>
+        </form>
+    </div>
+</div>

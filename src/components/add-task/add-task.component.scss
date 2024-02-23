@@ -1,0 +1,77 @@
+.container {
+    padding: 25px 30px;
+    border-radius: 5px;
+    align-items: center;
+    border-radius: 20px;
+
+    .container .title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .title-head {
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin: 10px 0 10px;
+        color: var(--primary-color);
+    }
+
+    .content form .user-details {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+
+    form .user-details .input-box {
+        margin-bottom: 10px;
+        width: calc(100% / 4 - 15px);
+    }
+
+    form .input-box span.details {
+        display: block;
+        font-weight: 500;
+    }
+
+
+    .user-details .input-box input {
+        height: 40px;
+        width: 250px;
+        border-radius: 5px;
+        padding-left: 15px;
+        border: 1px solid #ccc;
+        border-bottom-width: 2px;
+    }
+
+    form .button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        margin-top: 20px;
+
+        .action-button {
+            border-radius: 5px;
+            border: none;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 5px 10px;
+            background-color: var(--primary-color);
+            box-shadow: 3px 3px 6px #4d4d4d;
+        }
+    }
+
+    input::placeholder {
+        color: var(--placeholder-color);
+        font-size: 0.9rem;
+        font-weight: 400;
+        letter-spacing: 1px;
+    }
+
+    input::-moz-placeholder {
+        color: var(--placeholder-color);
+        letter-spacing: 1px;
+    }
+}

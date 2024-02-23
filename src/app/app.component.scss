@@ -1,0 +1,10 @@
+$overall-height: 100vh;
+$header-height: 80px;
+
+div .main {
+    height: $overall-height;
+
+    app-header {
+        height: $header-height;
+    }
+}
