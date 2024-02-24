@@ -1,10 +1,10 @@
 <div class="container">
     <div class="title">
         @if (!isEditMode) {
-            <p class="title-head">Create Task</p>
+        <p class="title-head">Create Task</p>
         }
         @else {
-            <p class="title-head">Edit/View Task</p>
+        <p class="title-head">Edit/View Task</p>
         }
     </div>
     <div class="content">
@@ -58,7 +58,7 @@
                 @if (!isEditMode) {
                 <button type="button" class="action-button" (click)="postFormData()">Submit</button>
                 }
-                @if (isEditMode) {
+                @else {
                 <button type="button" class="action-button" (click)="updateTaskDetails()">Update</button>
                 }
             </div>

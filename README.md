@@ -1,27 +1,23 @@
 # TaskManagement
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.1.
+This project stimualates the task management between multiple users, allowing them to create, read, update and delete the task.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+>Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
-## Code scaffolding
+>Run `json-server --watch task.json` which will run the json-server used to store the task users creates or performs any other action to it.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Navigate to `home` page(default route), where you can click on `3 dots`, which enables you to perform actions such as View/Edit (or) Delete task.
 
-## Build
+Edit provide the user to edit the task, also user can mark the task as completed. Which updates in the `home` page.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+This application has dependency with `sweetalert`, which is used to show toast messages to the user.
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `ng test` to execute the unit tests via Karma test runner.
 
-## Running end-to-end tests
+Also, you can run `ng test --code-coverage` to see the coverage of the test cases. (covered 96% overall)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

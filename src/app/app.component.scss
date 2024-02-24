@@ -1,10 +1,14 @@
 $overall-height: 100vh;
 $header-height: 80px;
 
-div .main {
-    height: $overall-height;
+app-header {
+    height: $header-height;
+}
 
-    app-header {
-        height: $header-height;
-    }
+div.main {
+    min-height: calc($overall-height - $header-height);
+    max-height: auto;
+    width: 90%;
+    margin: 20px auto;
+    box-shadow: 2px 4px 6px var(--primary-color);
 }

@@ -4,6 +4,8 @@ nav {
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
+    position: sticky;
+    top: 0;
 
     >h1 {
         color: white;
