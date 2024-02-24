@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SharedService } from '../../services/shared.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -55,25 +55,42 @@ export class AddTaskComponent implements OnInit, OnDestroy {
       description: new FormControl('', [Validators.required]),
       dueDate: new FormControl('', [Validators.required]),
       assignedTo: new FormControl('', [Validators.required]),
-      status: new FormControl('', [Validators.required])
+      status: new FormControl('pending', [Validators.required]) //at first task will be on pending state
     });
   }
 
+  get formControls(): { [key: string]: AbstractControl } {
+    return this.taskForm.controls;
+  }
+
   public postFormData(): void {
-    this.postSubscription = this.service.addTaskDetails(this.taskForm.value).subscribe({
-      next: () => {
-        this.taskForm.reset();
-        this.router.navigate(['/home']);
-      },
-      error: (err: HttpErrorResponse) => {
-        console.log(err);
-        this.toast.fire({
-          icon: 'error',
-          text: 'Something went wrong!',
-          showConfirmButton: false
-        })
-      }
-    })
+    if (this.taskForm.valid) {
+      this.postSubscription = this.service.addTaskDetails(this.taskForm.value).subscribe({
+        next: () => {
+          this.taskForm.reset();
+          this.toast.fire({
+            icon: 'success',
+            text: 'Task created successfully',
+            showConfirmButton: false
+          })
+          this.router.navigate(['/home']);
+        },
+        error: (err: HttpErrorResponse) => {
+          console.log(err);
+          this.toast.fire({
+            icon: 'error',
+            text: 'Something went wrong!',
+            showConfirmButton: false
+          })
+        }
+      })
+    } else {
+      this.toast.fire({
+        icon: 'error',
+        text: 'Please fill all the empty fields',
+        showConfirmButton: false
+      })
+    }
   }
 
   public getTaskDetailsByID(): void {
@@ -107,20 +124,32 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   }
 
   public updateTaskDetails(): void {
-    this.isEditMode = true;
-    this.service.updateTaskDetails(this.taskId, this.taskForm.value).subscribe({
-      next: () => {
-        this.router.navigate(['home']);
-      },
-      error: (err: HttpErrorResponse) => {
-        console.log(err);
-        this.toast.fire({
-          icon: 'error',
-          text: 'Something went wrong!',
-          showConfirmButton: false
-        })
-      }
-    })
+    if (this.taskForm.valid) {
+      this.service.updateTaskDetails(this.taskId, this.taskForm.value).subscribe({
+        next: () => {
+          this.router.navigate(['home']);
+          this.toast.fire({
+            icon: 'success',
+            text: 'Task updated successfully',
+            showConfirmButton: false
+          })
+        },
+        error: (err: HttpErrorResponse) => {
+          console.log(err);
+          this.toast.fire({
+            icon: 'error',
+            text: 'Something went wrong!',
+            showConfirmButton: false
+          })
+        }
+      })
+    } else {
+      this.toast.fire({
+        icon: 'error',
+        text: 'Please fill all the empty fields',
+        showConfirmButton: false
+      })
+    }
   }
 
   public handleCancel(): void {

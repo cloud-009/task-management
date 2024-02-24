@@ -12,13 +12,14 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
   taskDetailsResponse: Array<ITaskInterface> = [];
   taskSubscription!: Subscription;
   dropdownElement!: HTMLElement;
+  showTooltip: { [key: number]: boolean } = {};
 
   constructor(private service: SharedService, private router: Router) { }
 
@@ -38,7 +39,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       toast.addEventListener('mouseenter', Swal.stopTimer)
       toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
-  })
+  });
 
   private taskDetails(): void {
     this.taskSubscription = this.service.getTaskDetails().subscribe({
@@ -53,7 +54,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   // date formatter from type yyyy-mm-dd to februrary 23, 2024
   public formatDate(inputDate: string): string {
-    const dateParts: Array<string> = inputDate.split('-'); // Split by dash (-) instead of slash (/)
+    const dateParts: Array<string> = inputDate.split('-');
     const date: Date = new Date(parseInt(dateParts[0]), parseInt(dateParts[1]) - 1, parseInt(dateParts[2])); // Year, month, day
     const monthName: string = date.toLocaleString('en-US', { month: 'long' });
     const dayYear: string = `${date.getDate()}, ${date.getFullYear()}`;
@@ -91,7 +92,8 @@ export class HomeComponent implements OnInit, OnDestroy {
           error: (err: HttpErrorResponse) => {
             this.toast.fire({
               icon: 'error',
-              text: 'Error while deleting'
+              text: 'Error while deleting',
+              showConfirmButton: false
             })
             console.log(err);
           }
@@ -100,9 +102,18 @@ export class HomeComponent implements OnInit, OnDestroy {
     })
   }
 
+  // tooltip for task title if length > 20
+  public truncateTitleWithTooltip(text: string, maxLength: number = 20): { truncatedText: string, showTooltip: boolean } {
+    const showTooltip: boolean = text.length > maxLength;
+    const truncatedText: string = showTooltip ? text.slice(0, maxLength) + '...' : text;
+    return { truncatedText, showTooltip };
+  }
+
   // sending id in the route
   public editTaskDetails(id: number) {
-    this.router.navigate(['/edittask/' + id]);
+    if (id !== undefined || id !== null) {
+      this.router.navigate(['/edittask/' + id]);
+    }
   }
 
   ngOnDestroy(): void {

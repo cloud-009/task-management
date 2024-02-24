@@ -1,6 +1,11 @@
 <div class="container">
     <div class="title">
-        <p class="title-head">Create Task</p>
+        @if (!isEditMode) {
+            <p class="title-head">Create Task</p>
+        }
+        @else {
+            <p class="title-head">Edit/View Task</p>
+        }
     </div>
     <div class="content">
         <form [formGroup]="taskForm">
@@ -8,28 +13,50 @@
                 <div class="input-box">
                     <span class="details">Title</span>
                     <input type="text" formControlName="title" placeholder="creating wireframe">
+                    <span class="error-container"
+                        [ngClass]="{'error-field' :formControls['title'].touched && formControls['title'].invalid}">
+                        This field is required
+                    </span>
                 </div>
                 <div class="input-box">
                     <span class="details">Description</span>
                     <input type="text" formControlName="description" placeholder="wireframe for user design">
+                    <span class="error-container"
+                        [ngClass]="{'error-field' :formControls['description'].touched && formControls['description'].invalid}">
+                        This field is required
+                    </span>
                 </div>
                 <div class="input-box">
                     <span class="details">Due date</span>
                     <input type="date" formControlName="dueDate" placeholder="dd/mm/yyyy">
+                    <span class="error-container"
+                        [ngClass]="{'error-field' :formControls['dueDate'].touched && formControls['dueDate'].invalid}">
+                        This field is required
+                    </span>
                 </div>
                 <div class="input-box">
                     <span class="details">Assigned To</span>
                     <input type="email" formControlName="assignedTo" placeholder="Harry Styles">
+                    <span class="error-container"
+                        [ngClass]="{'error-field' :formControls['assignedTo'].touched && formControls['assignedTo'].invalid}">
+                        This field is required
+                    </span>
                 </div>
+                @if (isEditMode) {
                 <div class="input-box">
                     <span class="details">Status</span>
                     <input type="email" formControlName="status" placeholder="Pending">
+                    <span class="error-container"
+                        [ngClass]="{'error-field' :formControls['status'].touched && formControls['status'].invalid}">
+                        This field is required
+                    </span>
                 </div>
+                }
             </div>
             <div class="button">
                 <button type="button" class="action-button" (click)="handleCancel()">Cancel</button>
                 @if (!isEditMode) {
-                    <button type="button" class="action-button" (click)="postFormData()">Submit</button>
+                <button type="button" class="action-button" (click)="postFormData()">Submit</button>
                 }
                 @if (isEditMode) {
                 <button type="button" class="action-button" (click)="updateTaskDetails()">Update</button>

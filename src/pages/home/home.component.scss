@@ -34,6 +34,20 @@ $card-height: 100px;
                 align-items: center;
                 justify-content: space-between;
 
+                >div.left-container>p.status {
+                    color: white;
+                    font-size: 0.7rem;
+                    text-transform: capitalize;
+
+                    >span.primary {
+                        color: var(--img-completed-status);
+                    }
+
+                    >span.secondary {
+                        color: var(--img-pending-status);
+                    }
+                }
+
                 >div.dropdown>img {
                     background-color: var(--quaternery-color);
                     padding: 0 5px;
@@ -41,20 +55,26 @@ $card-height: 100px;
                     cursor: pointer;
                 }
 
+                .custom-tooltip {
+                    position: absolute;
+                    background-color: black;
+                    color: white;
+                    padding: 5px;
+                    border-radius: 5px;
+                    z-index: 1;
+                    font-size: 0.75rem;
+                }
+
                 .title {
                     color: white;
+                    text-transform: capitalize;
                     font-weight: 500;
                 }
             }
 
             .date-container {
-                width: 50%;
-                border-radius: 5px;
-                background-color: white;
-                border: 2px solid var(--quaternery-color);
-                padding: 0 5px;
                 font-size: 0.8rem;
-                box-shadow: 1px 2px 3px var(--quaternery-color);
+                color: white;
             }
 
             .footer>p {

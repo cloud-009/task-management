@@ -25,8 +25,9 @@
 
 
     form .user-details .input-box {
-        margin-bottom: 10px;
-        width: calc(100% / 4 - 15px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 
     form .input-box span.details {
@@ -34,14 +35,25 @@
         font-weight: 500;
     }
 
+    .error-container {
+        visibility: hidden;
+        height: 20px;
+        font-size: 0.6rem;
+        color: red;
+
+    }
+
+    .error-field {
+        visibility: visible;
+    }
 
     .user-details .input-box input {
         height: 40px;
         width: 250px;
         border-radius: 5px;
         padding-left: 15px;
-        border: 1px solid #ccc;
-        border-bottom-width: 2px;
+        border: 1px solid var(--primary-color);
+        outline: none;
     }
 
     form .button {
