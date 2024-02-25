@@ -12,9 +12,7 @@ Navigate to `home` page(default route), where you can click on `3 dots`, which e
 
 Edit provide the user to edit the task, also user can mark the task as completed. Which updates in the `home` page.
 
-This application has dependency with `sweetalert`, which is used to show toast messages to the user.
-
-Also dependency with `ng-http-loader`, to show the loader while creating a http call.
+>Dependencies - `ng-http-loader` and `sweetalert`
 
 ## Running unit tests
 
