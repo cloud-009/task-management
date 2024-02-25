@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SharedService } from '../../services/shared.service';
 import { ITaskInterface } from '../../interface/task-interface';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
+import { Subscription, switchMap } from 'rxjs';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { SpinnerVisibilityService } from 'ng-http-loader';
@@ -117,6 +117,57 @@ export class HomeComponent implements OnInit, OnDestroy {
   public editTaskDetails(id: number) {
     if (id !== undefined || id !== null) {
       this.router.navigate(['/edittask/' + id]);
+    }
+  }
+
+  public markTaskAsCompleted(event: MouseEvent, id: number) {
+    if (event && (event.target as HTMLElement).innerHTML.toLowerCase() !== 'completed') {
+      Swal.fire({
+        titleText: 'Mark task as completed ?',
+        text: 'You are going to mark your task as completed',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Confirm',
+        cancelButtonText: 'Cancel'
+      }).then((result) => {
+        if (result.value) {
+          this.service.getTaskDetailByID(id).pipe(
+            switchMap((res: ITaskInterface) => {
+              return this.service.updateTaskDetails(id, {
+                id: res.id,
+                title: res.title,
+                dueDate: res.dueDate,
+                description: res.description,
+                assignedTo: res.assignedTo,
+                status: 'completed'
+              });
+            })
+          ).subscribe({
+            next: () => {
+              this.toast.fire({
+                icon: 'success',
+                text: 'Marked task as completed',
+                showConfirmButton: false
+              })
+              this.taskDetails();
+            },
+            error: (err: HttpErrorResponse) => {
+              console.log(err);
+              this.toast.fire({
+                icon: 'error',
+                text: 'Something went wrong',
+                showConfirmButton: false
+              });
+            }
+          });
+        }
+      })
+    } else {
+      this.toast.fire({
+        icon: 'info',
+        text: 'Task is completed',
+        showConfirmButton: false
+      })
     }
   }
 

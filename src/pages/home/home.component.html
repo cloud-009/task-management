@@ -11,8 +11,8 @@
                         <span class="custom-tooltip" [style.display]="showTooltip[item.id] ? 'block' : 'none'"
                             *ngIf="showTooltip[item.id]">{{item.title}}</span>
                     </p>
-                    <p class="status">Status : <span [ngClass]="{'primary': item.status.toLowerCase() !== 'pending',
-                        'secondary': item.status.toLowerCase() === 'pending'}">{{item.status}}</span></p>
+                    <p class="status">Status : <span style="cursor: pointer;" [ngClass]="{'primary': item.status.toLowerCase() !== 'pending',
+                        'secondary': item.status.toLowerCase() === 'pending'}" (click)="markTaskAsCompleted($event, item.id)">{{item.status}}</span></p>
                 </div>
                 <div class="dropdown">
                     <!-- working with complete and pending only -->
