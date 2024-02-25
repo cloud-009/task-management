@@ -17,7 +17,7 @@
                 <div class="dropdown">
                     <!-- working with complete and pending only -->
                     <img src="assets/dots.png" alt="dots" class="dots" (click)="toggleDropdown($event)">
-                    <div class="dropdown-content">
+                    <div class="dropdown-content" (mouseleave)="dropdownElement.style.display = 'none'">
                         <a (click)="editTaskDetails(item.id)">Edit/View</a>
                         <a (click)="deleteTask(item.id)">Delete</a>
                     </div>
