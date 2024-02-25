@@ -20,4 +20,6 @@ Run `ng test` to execute the unit tests via Karma test runner.
 
 Also, you can run `ng test --code-coverage` to see the coverage of the test cases. (covered 91% overall)
 
+### New feature added 
 
+>User can mark the task as completed from `Home` page itself by clicking on the `status`
