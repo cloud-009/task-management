@@ -14,10 +14,12 @@ Edit provide the user to edit the task, also user can mark the task as completed
 
 This application has dependency with `sweetalert`, which is used to show toast messages to the user.
 
+Also dependency with `ng-http-loader`, to show the loader while creating a http call.
+
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via Karma test runner.
 
-Also, you can run `ng test --code-coverage` to see the coverage of the test cases. (covered 96% overall)
+Also, you can run `ng test --code-coverage` to see the coverage of the test cases. (covered 91% overall)
 
 

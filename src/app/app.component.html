@@ -3,6 +3,10 @@
 
 <div class="main">
 
+  <!-- loader for http calls -->
+  <ng-http-loader spinner="sk-three-bounce" [backdrop]="true" [backgroundColor]="'#ff0000'" [opacity]="'.4'"
+    [extraDuration]="500" [minDuration]="3000"></ng-http-loader>
+
   <!-- content -->
   <router-outlet></router-outlet>
 </div>

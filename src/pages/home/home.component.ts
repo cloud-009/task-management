@@ -6,6 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { SpinnerVisibilityService } from 'ng-http-loader';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +22,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   dropdownElement!: HTMLElement;
   showTooltip: { [key: number]: boolean } = {};
 
-  constructor(private service: SharedService, private router: Router) { }
+  constructor(private service: SharedService, private router: Router, private spinner: SpinnerVisibilityService) { }
 
   ngOnInit(): void {
     this.taskDetails();
@@ -42,12 +43,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   });
 
   private taskDetails(): void {
+    this.spinner.show();
     this.taskSubscription = this.service.getTaskDetails().subscribe({
       next: (res: Array<ITaskInterface>) => {
         this.taskDetailsResponse = res;
+        this.spinner.hide();
       },
       error: (err: HttpErrorResponse) => {
         console.log(err);
+        this.spinner.hide();
       }
     });
   }

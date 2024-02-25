@@ -17,7 +17,7 @@ export const routes: Routes = [
         component: AddTaskComponent
     },
     {
-        path: 'edittask/:id',
+        path: 'edittask/:id', //using same component to edit as well
         component: AddTaskComponent
     },
     {

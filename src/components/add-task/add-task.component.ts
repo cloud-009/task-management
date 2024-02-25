@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ITaskInterface } from '../../interface/task-interface';
 import Swal from 'sweetalert2';
+import { SpinnerVisibilityService } from 'ng-http-loader';
 
 @Component({
   selector: 'app-add-task',
@@ -27,7 +28,8 @@ export class AddTaskComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private service: SharedService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private spinner: SpinnerVisibilityService
   ) { }
 
   ngOnInit(): void {
@@ -65,9 +67,11 @@ export class AddTaskComponent implements OnInit, OnDestroy {
 
   public postFormData(): void {
     if (this.taskForm.valid) {
+      this.spinner.show()
       this.postSubscription = this.service.addTaskDetails(this.taskForm.value).subscribe({
         next: () => {
           this.taskForm.reset();
+          this.spinner.hide();
           this.toast.fire({
             icon: 'success',
             text: 'Task created successfully',
@@ -77,6 +81,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
         },
         error: (err: HttpErrorResponse) => {
           console.log(err);
+          this.spinner.hide();
           this.toast.fire({
             icon: 'error',
             text: 'Something went wrong!',
@@ -96,13 +101,16 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   public getTaskDetailsByID(): void {
     this.taskId = parseInt(this.activatedRoute.snapshot.paramMap.get('id') ?? '', 10);//default to '' if id is null
     if (this.taskId !== undefined && !Number.isNaN(this.taskId)) {
+      this.spinner.show();
       this.isEditMode = true;
       this.service.getTaskDetailByID(this.taskId).subscribe({
         next: (res: ITaskInterface) => {
           this.populateInputFields(res);
+          this.spinner.hide();
         },
         error: (err: HttpErrorResponse) => {
           console.log(err);
+          this.spinner.hide();
           this.toast.fire({
             icon: 'error',
             text: 'Something went wrong!',
@@ -114,6 +122,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
   }
 
   private populateInputFields(task: ITaskInterface): void {
+    this.spinner.show();
     this.taskForm.patchValue({
       title: task.title,
       description: task.description,
@@ -121,12 +130,15 @@ export class AddTaskComponent implements OnInit, OnDestroy {
       assignedTo: task.assignedTo,
       status: task.status
     });
+    this.spinner.hide();
   }
 
   public updateTaskDetails(): void {
     if (this.taskForm.valid) {
+      this.spinner.show();
       this.service.updateTaskDetails(this.taskId, this.taskForm.value).subscribe({
         next: () => {
+          this.spinner.hide();
           this.router.navigate(['home']);
           this.toast.fire({
             icon: 'success',
@@ -136,6 +148,7 @@ export class AddTaskComponent implements OnInit, OnDestroy {
         },
         error: (err: HttpErrorResponse) => {
           console.log(err);
+          this.spinner.hide();
           this.toast.fire({
             icon: 'error',
             text: 'Something went wrong!',
