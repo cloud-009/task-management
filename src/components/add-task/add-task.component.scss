@@ -20,7 +20,9 @@
     .content form .user-details {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
+        justify-content: start;
+        align-items: center;
+        gap: 0 20px;
     }
 
 

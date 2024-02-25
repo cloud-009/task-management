@@ -7,6 +7,10 @@ import { Subscription, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
+/* 
+skipping testing private method taskDetails()S
+*/
+
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
@@ -28,6 +32,15 @@ describe('HomeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // only testing whether the method is called or not
+  it('should test whether taskDetails is called or not',()=>{
+    // need to use any to spy on private method
+    const methodSpy = spyOn<any>(component, 'taskDetails');
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(methodSpy).toHaveBeenCalled();
+  })
 
   // testing date formatter, if returning the correct date format
   it('should format the date correctly', () => {

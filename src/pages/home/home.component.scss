@@ -116,3 +116,15 @@ $card-height: 100px;
         }
     }
 }
+
+@media (max-width: 730px) {
+    div.card-container {
+        justify-content: center !important;
+    }
+}
+
+@media only screen and (min-width: 730px) and (max-width: 900px) {
+    div.card {
+        width: $card-width - 60px !important;
+    }
+}

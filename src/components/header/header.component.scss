@@ -6,8 +6,10 @@ nav {
     padding: 0 20px;
     position: sticky;
     top: 0;
+    z-index: 10;
 
     >h1 {
+        font-size: clamp(0.8rem, 2vw, 2rem);
         color: white;
     }
 
@@ -23,15 +25,21 @@ nav {
             padding: 0 10px;
             border-radius: 10px;
             color: white;
+            font-size: clamp(0.7rem, 2vw, 1rem);
 
             &:last-child {
                 margin-left: 10px;
             }
 
             &:hover {
-                border: 1px solid var(--primary-color);
                 background-color: var(--primary-color);
             }
         }
+    }
+}
+
+@media (max-width: 400px) {
+    ul {
+        justify-content: space-between !important;
     }
 }
